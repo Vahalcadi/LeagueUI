@@ -485,6 +485,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087719446}
   m_CullTransparentMesh: 1
+--- !u!1 &1771948873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3805612538352955898, guid: 0037de00b2dee9044b8eda998bb8c089, type: 3}
+  m_PrefabInstance: {fileID: 8138114812060121263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1771948874 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4498311055592358960, guid: 0037de00b2dee9044b8eda998bb8c089, type: 3}
@@ -535,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summonerSlot: {fileID: 8632338536354193129, guid: da5b401dd1ad72a40aa2bdcf04561f5f, type: 3}
-  scoreboard: {fileID: 3805612538352955898, guid: 0037de00b2dee9044b8eda998bb8c089, type: 3}
+  scoreboard: {fileID: 1771948873}
   summonerSpells:
   - {fileID: 21300000, guid: 4b310c65bbb7bc443800330865221301, type: 3}
   - {fileID: 21300000, guid: f413c4190194e074a8ffabf749060540, type: 3}

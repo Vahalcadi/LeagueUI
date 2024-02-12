@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject summonerSlot;
     [SerializeField] private GameObject scoreboard;
-    private List<GameObject> summonerSlotList;
+    private List<GameObject> summonerSlotList = new();
     [SerializeField] private List<Sprite> summonerSpells;
     [SerializeField] private List<Sprite> keyRunes;
     [SerializeField] private List<Sprite> secondaryRunes;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InstantiateSummoners(10);
     }
 
     // Update is called once per frame
@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < numberOfSummoners; i++)
         {
             summonerSlotList.Add(Instantiate(summonerSlot, scoreboard.transform));
-            summonerSlotList[i].transform.Find("SummonerSpell1").GetComponentInChildren<Image>().sprite = summonerSpells[Random.Range(0, summonerSpells.Count)];
-            summonerSlotList[i].transform.Find("SummonerSpell2").GetComponentInChildren<Image>().sprite = summonerSpells[Random.Range(0, summonerSpells.Count)];
-            summonerSlotList[i].transform.Find("CharacterSlot").transform.Find("CharacterIcon").GetComponentInChildren<Image>().sprite = championIcon[Random.Range(0, championIcon.Count)];
-            summonerSlotList[i].transform.Find("UltimateSlot").transform.Find("RechargeUltimate").GetComponentInChildren<Image>().fillAmount = 0;
-            summonerSlotList[i].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponentInChildren<Image>().color = Color.clear;
+
+            summonerSlotList[i].transform.Find("SummonerSpell1").transform.Find("Image").GetComponent<Image>().sprite = summonerSpells[Random.Range(0, summonerSpells.Count)];
+            summonerSlotList[i].transform.Find("SummonerSpell2").transform.Find("Image").GetComponent<Image>().sprite = summonerSpells[Random.Range(0, summonerSpells.Count)];
+            summonerSlotList[i].transform.Find("CharacterSlot").transform.Find("CharacterIcon").transform.Find("Image").GetComponentInChildren<Image>().sprite = championIcon[Random.Range(0, championIcon.Count)];
+            summonerSlotList[i].transform.Find("UltimateSlot").transform.Find("RechargeUltimate").GetComponent<Image>().fillAmount = 0;
+            summonerSlotList[i].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponent<Image>().color = Color.clear;
             summonerSlotList[i].transform.Find("LevelSlot").GetComponentInChildren<TextMeshProUGUI>().text = "1";
             summonerSlotList[i].transform.Find("PrimaryRune").GetComponent<Image>().sprite = keyRunes[Random.Range(0, keyRunes.Count)];
             summonerSlotList[i].transform.Find("SecondaryRune").GetComponent<Image>().sprite = secondaryRunes[Random.Range(0, secondaryRunes.Count)];
