@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Sprite> keyRunes;
     [SerializeField] private List<Sprite> secondaryRunes;
     [SerializeField] private List<Sprite> championIcon;
-    [SerializeField] private TextMeshProUGUI minionCounter;
-    [SerializeField] private TextMeshProUGUI kda;
+    private TextMeshProUGUI minionCounter;
+    private TextMeshProUGUI kda;
 
 
     // Start is called before the first frame update
