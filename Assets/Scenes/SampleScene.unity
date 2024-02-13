@@ -892,31 +892,51 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9470a418e82d1cd498fec6f130f6523e, type: 3}
   - {fileID: 21300000, guid: 76cc216b3d0d3854c8e279c904b93e6a, type: 3}
   - {fileID: 21300000, guid: ca4b685ee1d2ed941953ca7a0e6f370a, type: 3}
-  keyRunes:
-  - {fileID: 21300000, guid: b1955b8ed46c23f43acc884e393913f8, type: 3}
-  - {fileID: 21300000, guid: 1b959a1a2e932ed469f20a6036484221, type: 3}
-  - {fileID: 21300000, guid: 75610bd3ddf660d40bb72caef9c12e12, type: 3}
-  - {fileID: 21300000, guid: b402b574283647848a3a4e9bffdf1e7d, type: 3}
-  - {fileID: 21300000, guid: d79c6bcbb3e682d40909575fc285b67c, type: 3}
-  - {fileID: 21300000, guid: b4b7b88ba88b3a64ea290a3c8e5b9fca, type: 3}
-  - {fileID: 21300000, guid: 521a87eeb4e069d49b3e0dc7de47e91f, type: 3}
-  - {fileID: 21300000, guid: 34248416a94233b49b01476a4d04ce89, type: 3}
-  - {fileID: 21300000, guid: 6c72e4a8d3dd06f479938708dac3de35, type: 3}
-  - {fileID: 21300000, guid: 55783acc79ef87f43b40e769b8d6d4d7, type: 3}
-  - {fileID: 21300000, guid: 81cbe494c6987a244941f3c22967800f, type: 3}
-  - {fileID: 21300000, guid: 55e2546c995de8046ae89d450f330a7f, type: 3}
-  - {fileID: 21300000, guid: 03a69fe9fce5cfa4b8abe7f4d3825211, type: 3}
-  - {fileID: 21300000, guid: c3002dcbf03366742a00f7716e1ffba8, type: 3}
-  - {fileID: 21300000, guid: 811b164a6bb5b9249842020ee1cc3a29, type: 3}
-  - {fileID: 21300000, guid: 116641f4ed8ceda47b75bddaf666e298, type: 3}
-  - {fileID: 21300000, guid: ef305f575033866459c88c5eadd8973e, type: 3}
-  secondaryRunes:
-  - {fileID: 21300000, guid: b13ff99eb61885d48b37a8256c3f91c4, type: 3}
-  - {fileID: 21300000, guid: d95bad6f646e66a45a8b078692e708f8, type: 3}
-  - {fileID: 21300000, guid: d4466627c97087545af1c6896420d275, type: 3}
-  - {fileID: 21300000, guid: 3937a6a48f035ad4a891e8f0f4951a23, type: 3}
-  - {fileID: 21300000, guid: 2e9626a5d81dad44fb5a9365032d4954, type: 3}
-  championIcon:
+  items:
+  - {fileID: 21300000, guid: 2679abfe25065ff49867becc01ec2627, type: 3}
+  - {fileID: 21300000, guid: 3d60668bab704664aa2e854875980273, type: 3}
+  - {fileID: 21300000, guid: 98d23b654d5aaf54ca9ac5c5f9f42def, type: 3}
+  - {fileID: 21300000, guid: 83cfeea4515feeb488d19ef28741f9aa, type: 3}
+  - {fileID: 21300000, guid: ee0aae2e21543884989e20fee11a6900, type: 3}
+  - {fileID: 21300000, guid: 04167f2e071f71e44b935cbdf4d7269a, type: 3}
+  - {fileID: 21300000, guid: 996c219581e523941a6d30d5ea28a208, type: 3}
+  - {fileID: 21300000, guid: 3cdc32edd94df0a408017e78cd3cfab1, type: 3}
+  - {fileID: 21300000, guid: 643d0e86afdd12f4a9f3efc36235af49, type: 3}
+  - {fileID: 21300000, guid: 403b24e616a1b4147ad500974d7245fc, type: 3}
+  - {fileID: 21300000, guid: 0c1b73a9922a7cd42be5f9385daa1e90, type: 3}
+  - {fileID: 21300000, guid: 104a1bbbb5e4076499c8985b19d80fce, type: 3}
+  wards:
+  - {fileID: 21300000, guid: 3ff0f45bd55482944b7dab41bb48c183, type: 3}
+  - {fileID: 21300000, guid: 2193aaec2d347654a8775cf873f2657c, type: 3}
+  runes:
+  - key: {fileID: 21300000, guid: 2e9626a5d81dad44fb5a9365032d4954, type: 3}
+    value:
+    - {fileID: 21300000, guid: 811b164a6bb5b9249842020ee1cc3a29, type: 3}
+    - {fileID: 21300000, guid: 116641f4ed8ceda47b75bddaf666e298, type: 3}
+    - {fileID: 21300000, guid: ef305f575033866459c88c5eadd8973e, type: 3}
+  - key: {fileID: 21300000, guid: 3937a6a48f035ad4a891e8f0f4951a23, type: 3}
+    value:
+    - {fileID: 21300000, guid: 81cbe494c6987a244941f3c22967800f, type: 3}
+    - {fileID: 21300000, guid: 55e2546c995de8046ae89d450f330a7f, type: 3}
+    - {fileID: 21300000, guid: 03a69fe9fce5cfa4b8abe7f4d3825211, type: 3}
+    - {fileID: 21300000, guid: c3002dcbf03366742a00f7716e1ffba8, type: 3}
+  - key: {fileID: 21300000, guid: d4466627c97087545af1c6896420d275, type: 3}
+    value:
+    - {fileID: 21300000, guid: 34248416a94233b49b01476a4d04ce89, type: 3}
+    - {fileID: 21300000, guid: 6c72e4a8d3dd06f479938708dac3de35, type: 3}
+    - {fileID: 21300000, guid: 55783acc79ef87f43b40e769b8d6d4d7, type: 3}
+  - key: {fileID: 21300000, guid: d95bad6f646e66a45a8b078692e708f8, type: 3}
+    value:
+    - {fileID: 21300000, guid: b402b574283647848a3a4e9bffdf1e7d, type: 3}
+    - {fileID: 21300000, guid: d79c6bcbb3e682d40909575fc285b67c, type: 3}
+    - {fileID: 21300000, guid: b4b7b88ba88b3a64ea290a3c8e5b9fca, type: 3}
+    - {fileID: 21300000, guid: 521a87eeb4e069d49b3e0dc7de47e91f, type: 3}
+  - key: {fileID: 21300000, guid: b13ff99eb61885d48b37a8256c3f91c4, type: 3}
+    value:
+    - {fileID: 21300000, guid: b1955b8ed46c23f43acc884e393913f8, type: 3}
+    - {fileID: 21300000, guid: 1b959a1a2e932ed469f20a6036484221, type: 3}
+    - {fileID: 21300000, guid: 75610bd3ddf660d40bb72caef9c12e12, type: 3}
+  championIcons:
   - {fileID: 21300000, guid: 561216d81b1705248baf020596351462, type: 3}
   - {fileID: 21300000, guid: 5a341c7385085e843871f10be68b9809, type: 3}
   - {fileID: 21300000, guid: 849ddaf7f63ad344fb898e4577d0a18f, type: 3}
