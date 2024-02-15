@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -23,6 +24,10 @@ public class GameManager : MonoBehaviour
 
     private int numberOfSummoners;
 
+    private bool canUseUlti;
+    private bool canUseSummoner1;
+    private bool canUseSummoner2;
+
     private int random;
     private List<int> extractedChampions = new();
     private List<int> extractedSummonerSpells = new();
@@ -39,8 +44,64 @@ public class GameManager : MonoBehaviour
                 GenerateRandomItem(summonerSlotList[i].transform.Find("ItemSlots").gameObject);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R) && canUseUlti)
+        {
+            canUseUlti = false;
+            summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponent<Image>().color = Color.clear;
+            summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("RechargeUltimate").GetComponent<Image>().fillAmount = 0;
+
+            StartCoroutine(RechargeUltimate());
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) && canUseSummoner1)
+        {
+            canUseSummoner1 = false;
+            summonerSlotList[0].transform.Find("SummonerSpell1").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount = 1;
+            StartCoroutine(RechargeSummonerSpellOnD());
+        }
+
+        if (Input.GetKeyDown(KeyCode.F) && canUseSummoner2)
+        {
+            canUseSummoner2 = false;
+            summonerSlotList[0].transform.Find("SummonerSpell2").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount = 1;
+            StartCoroutine(RechargeSummonerSpellOnF());
+        }
     }
 
+    public IEnumerator RechargeSummonerSpellOnD()
+    {
+        do
+        {
+            summonerSlotList[0].transform.Find("SummonerSpell1").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount -= Time.fixedDeltaTime;
+            yield return new WaitForSeconds(.5f);
+        } while (summonerSlotList[0].transform.Find("SummonerSpell1").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount > 0);
+        canUseSummoner1 = true;
+    }
+
+    public IEnumerator RechargeSummonerSpellOnF()
+    {
+        do
+        {
+            summonerSlotList[0].transform.Find("SummonerSpell2").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount -= Time.fixedDeltaTime;
+            yield return new WaitForSeconds(.5f);
+        } while (summonerSlotList[0].transform.Find("SummonerSpell2").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount > 0);
+        canUseSummoner2 = true;
+    }
+
+    public IEnumerator RechargeUltimate()
+    {
+        do
+        {
+            summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("RechargeUltimate").GetComponent<Image>().fillAmount += Time.fixedDeltaTime;
+            yield return new WaitForSeconds(.5f);
+
+        }
+        while (summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("RechargeUltimate").GetComponent<Image>().fillAmount < 1);
+
+        canUseUlti = true;
+        summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponent<Image>().color = Color.green;
+    }
 
     public void InstantiateSummoners(string numberOfSummoners)
     {
@@ -68,6 +129,8 @@ public class GameManager : MonoBehaviour
                     summonerSlotList[i].transform.Find("SummonerSpell1").transform.Find("Image").GetComponent<Image>(),
                     summonerSlotList[i].transform.Find("SummonerSpell2").transform.Find("Image").GetComponent<Image>()
                 );
+            canUseSummoner1 = true;
+            canUseSummoner2 = true;
 
             GenerateRandomRunes
                 (
@@ -81,8 +144,11 @@ public class GameManager : MonoBehaviour
                 );
 
             summonerSlotList[i].transform.Find("LevelSlot").GetComponentInChildren<TextMeshProUGUI>().text = "6";
+
             summonerSlotList[i].transform.Find("UltimateSlot").transform.Find("RechargeUltimate").GetComponent<Image>().fillAmount = 0;
             summonerSlotList[i].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponent<Image>().color = Color.green;
+            canUseUlti = true;
+
             summonerSlotList[i].transform.Find("MinionCounter").GetComponent<TextMeshProUGUI>().text = "0";
             summonerSlotList[i].transform.Find("KDA").GetComponent<TextMeshProUGUI>().text = "0/0/0";
 
