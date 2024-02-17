@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
+    #region class variables
     [SerializeField] private GameObject summonerSlot;
     [SerializeField] private GameObject scoreboard;
     private List<GameObject> summonerSlotList = new();
@@ -24,20 +24,22 @@ public class GameManager : MonoBehaviour
 
     private int numberOfSummoners;
 
+    private bool isDead;
     private bool canUseUlti;
     private bool canUseSummoner1;
     private bool canUseSummoner2;
+    private bool isEnabled;
 
     private int random;
     private List<int> extractedChampions = new();
     private List<int> extractedSummonerSpells = new();
     private List<int> extractedRunes = new();
     private List<int> extractedItems = new();
-
+    #endregion
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && numberOfSummoners >= 1)
+        if (Input.GetKeyDown(KeyCode.P) && numberOfSummoners >= 1 && isEnabled)
         {
             for (int i = 0; i < numberOfSummoners; i++)
             {
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && canUseUlti)
+        if (Input.GetKeyDown(KeyCode.R) && canUseUlti && !isDead && isEnabled)
         {
             canUseUlti = false;
             summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponent<Image>().color = Color.clear;
@@ -54,21 +56,28 @@ public class GameManager : MonoBehaviour
             StartCoroutine(RechargeUltimate());
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && canUseSummoner1)
+        if (Input.GetKeyDown(KeyCode.D) && canUseSummoner1 && !isDead && isEnabled)
         {
             canUseSummoner1 = false;
             summonerSlotList[0].transform.Find("SummonerSpell1").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount = 1;
             StartCoroutine(RechargeSummonerSpellOnD());
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && canUseSummoner2)
+        if (Input.GetKeyDown(KeyCode.F) && canUseSummoner2 && !isDead && isEnabled)
         {
             canUseSummoner2 = false;
             summonerSlotList[0].transform.Find("SummonerSpell2").transform.Find("RechargeSummoner").GetComponent<Image>().fillAmount = 1;
             StartCoroutine(RechargeSummonerSpellOnF());
         }
+        if (Input.GetKeyDown(KeyCode.K) && !isDead && isEnabled)
+        {
+            isDead = true;
+            StartCoroutine(DeathTimer());
+        }
+
     }
 
+    #region abilities
     public IEnumerator RechargeSummonerSpellOnD()
     {
         do
@@ -102,6 +111,25 @@ public class GameManager : MonoBehaviour
         canUseUlti = true;
         summonerSlotList[0].transform.Find("UltimateSlot").transform.Find("FullUltimate").GetComponent<Image>().color = Color.green;
     }
+
+    public IEnumerator DeathTimer()
+    {
+        int deathCounter = 15;
+        summonerSlotList[0].transform.Find("CharacterSlot").transform.Find("CharacterIcon").transform.Find("Image").GetComponentInChildren<Image>().color = Color.grey;
+        summonerSlotList[0].transform.Find("CharacterSlot").transform.Find("DeathCounter").GetComponent<TextMeshProUGUI>().color = Color.red;
+        summonerSlotList[0].transform.Find("CharacterSlot").transform.Find("DeathCounter").GetComponent<TextMeshProUGUI>().text = $"{deathCounter}";
+
+        do
+        {
+            yield return new WaitForSeconds(1);
+            deathCounter--;
+            summonerSlotList[0].transform.Find("CharacterSlot").transform.Find("DeathCounter").GetComponent<TextMeshProUGUI>().text = $"{deathCounter}";
+        }
+        while (deathCounter > 0);
+
+        isDead = false;
+    }
+    #endregion
 
     public void InstantiateSummoners(string numberOfSummoners)
     {
@@ -142,6 +170,9 @@ public class GameManager : MonoBehaviour
                 (
                     summonerSlotList[i].transform.Find("CharacterSlot").transform.Find("CharacterIcon").transform.Find("Image").GetComponentInChildren<Image>()
                 );
+            summonerSlotList[i].transform.Find("CharacterSlot").transform.Find("DeathCounter").GetComponent<TextMeshProUGUI>().color = Color.clear;
+            summonerSlotList[i].transform.Find("CharacterSlot").transform.Find("DeathCounter").GetComponent<TextMeshProUGUI>().text = "0";
+
 
             summonerSlotList[i].transform.Find("LevelSlot").GetComponentInChildren<TextMeshProUGUI>().text = "6";
 
@@ -156,9 +187,8 @@ public class GameManager : MonoBehaviour
         }
 
         extractedChampions.Clear();
+        isEnabled = true;
     }
-
-
 
     private void GenerateRandomRunes(Image keyRune, Image secondaryRune)
     {
@@ -227,7 +257,6 @@ public class GameManager : MonoBehaviour
 
         extractedItems.Clear();
     }
-
 }
 
 [Serializable]
