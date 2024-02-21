@@ -19,8 +19,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<Sprite> championIcons;
 
-    private TextMeshProUGUI minionCounter;
-    private TextMeshProUGUI kda;
+    int deathCounter;
+    int minionCounter;
+    int level;
 
     private int numberOfSummoners;
 
@@ -39,6 +40,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+            scoreboard.SetActive(!scoreboard.activeSelf);
+
         if (Input.GetKeyDown(KeyCode.P) && numberOfSummoners >= 1 && isEnabled)
         {
             for (int i = 0; i < numberOfSummoners; i++)
@@ -72,9 +76,25 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && !isDead && isEnabled)
         {
             isDead = true;
+            string death = summonerSlotList[0].transform.Find("KDA").GetComponent<TextMeshProUGUI>().text.Split("/")[1];
+            deathCounter = Convert.ToInt32(death) + 1;
+            summonerSlotList[0].transform.Find("KDA").GetComponent<TextMeshProUGUI>().text = $"0/{deathCounter}/0";
             StartCoroutine(DeathTimer());
         }
+        if (Input.GetKeyDown(KeyCode.G) && !isDead && isEnabled)
+        {
+            minionCounter = Convert.ToInt32(summonerSlotList[0].transform.Find("MinionCounter").GetComponent<TextMeshProUGUI>().text) + 1;
+            summonerSlotList[0].transform.Find("MinionCounter").GetComponent<TextMeshProUGUI>().text = $"{minionCounter}";
+        }
 
+        if (Input.GetKeyDown(KeyCode.J) && !isDead && isEnabled)
+        {
+            level = Convert.ToInt32(summonerSlotList[0].transform.Find("LevelSlot").GetComponentInChildren<TextMeshProUGUI>().text) + 1;
+            if (level > 18)
+                return; 
+
+            summonerSlotList[0].transform.Find("LevelSlot").GetComponentInChildren<TextMeshProUGUI>().text = $"{level}";
+        }
     }
 
     #region abilities
@@ -127,12 +147,17 @@ public class GameManager : MonoBehaviour
         }
         while (deathCounter > 0);
 
+        summonerSlotList[0].transform.Find("CharacterSlot").transform.Find("CharacterIcon").transform.Find("Image").GetComponentInChildren<Image>().color = Color.white;
+        summonerSlotList[0].transform.Find("CharacterSlot").transform.Find("DeathCounter").GetComponent<TextMeshProUGUI>().color = Color.clear;
+
         isDead = false;
     }
     #endregion
 
     public void InstantiateSummoners(string numberOfSummoners)
     {
+        
+
         if (summonerSlotList.Count > 0)
         {
             foreach (var item in summonerSlotList)
@@ -147,6 +172,8 @@ public class GameManager : MonoBehaviour
 
         if (this.numberOfSummoners > 10)
             this.numberOfSummoners = 10;
+        else if (this.numberOfSummoners < 1)
+            return;
 
         for (int i = 0; i < this.numberOfSummoners; i++)
         {
